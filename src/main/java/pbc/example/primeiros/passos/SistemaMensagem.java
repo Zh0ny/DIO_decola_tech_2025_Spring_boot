@@ -1,24 +1,26 @@
 package pbc.example.primeiros.passos;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SistemaMensagem {
-    @Autowired
-    private Remetente noreply;
+public class SistemaMensagem implements CommandLineRunner {
+    @Value("${nome:noreply}")
+    private String nome;
+    @Value("${email:}")
+    private String email;
+    @Value("${telefones}")
+    private List<Long> telefones;
 
-    @Autowired
-    private Remetente techTeam;
-
-    public void enviarConfirmacao() {
-        System.out.println(noreply);
-        System.out.println("Seu Cadastro foi aprovado.");
-    }
-
-    public void enviarMensagemBoasVindas() {
-        techTeam.setEmail("tech@dio.com.br");
-        System.out.println(techTeam);
-        System.out.println("Bem vindo à Tech Elite");
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.println("Mensagem enviada por: " + nome + "\nE-mail: " + 
+        email + "\nCom telefone(s) para contato: " + telefones.getClass());	
+        System.out.println("Seu cadastro foi aprovado!");
     }
 }
